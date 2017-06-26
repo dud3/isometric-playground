@@ -43,7 +43,7 @@
 //  Since we know how to project from screen->isometric, one thing left is to find the
 //  projection from isometric->screen, which is the inverse.
 //
-//  We have the isoMatrix, projects scree->isometric, we need to find the inverse matrix.
+//  We have the isoMatrix which projects scree->isometric, we need to find the inverse matrix.
 //  Which is done like the following:
 //      M = [ a b ]
 //          [ c d ]
@@ -57,23 +57,28 @@ var projection = {
   xAxis: {x: 1, y: 0.5},
   yAxis: {x: -1, y: 0.5},
   origin: {x: 0, y: 0},
+  project: function(x, y) {
+    return {
+      x: this.xAxis.x * x + this.yAxis.x * y,
+      y: this.xAxis.y * x + this.yAxis.y * y
+    }
+  },
   getInverseMatrix: function() {
     // Inverse matrix
     //
     // M = [ a b ]
     //     [ c d ]
     //
-    // det = 1 / ad - bc
-    // det * [ d -b]
-    //       [-c  a]
+    // 1 / ad - bc * [ d -b]
+    //               [-c  a]
     //
+    // Determinant
 
     var a = this.xAxis.x;
     var b = this.yAxis.x;
     var c = this.xAxis.y;
     var d = this.yAxis.y;
 
-    // Determinant
     var det = 1 / ((a * d) - (b * c));
 
     return {
@@ -86,12 +91,6 @@ var projection = {
         y: det * a
       }
     };
-  },
-  iso2global: function(x, y) {
-    return {
-      x: this.xAxis.x * x + this.yAxis.x * y,
-      y: this.xAxis.y * x + this.yAxis.y * y
-    }
   },
   global2iso: function(x, y) {
     var invM = this.getInverseMatrix();
