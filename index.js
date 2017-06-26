@@ -1,18 +1,17 @@
 window.onload = function() {
 
-window.aBed = new bed(0, 0);
-aBed.draw();
+  window.aBed = new bed(0, 0);
+  aBed.draw();
 
-window.aTile = new tile(0, 0, 0);
-aTile.draw();
+  window.aTile = new tile(0, 0, 0);
+  aTile.draw();
 
-// Draw everything
+  // Draw everything
 
-// map.drawTiles();
+  // map.drawTiles();
 
-grid.draw();
+  grid.draw();
 
-var aCircle = new circle(10, 10);
+  var aCircle = new circle(10, 10);
 
 }
-

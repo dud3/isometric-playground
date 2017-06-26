@@ -1,5 +1,5 @@
-var padd = 400;
 var map = {
+  padd: 400,
   tile: {
     width: 10,
     height: 10
@@ -76,7 +76,7 @@ map.drawTiles = function() {
   for(var i = 0; i < map.size().width; i++) {
     for(var j = 0; j < map.size().height; j++) {
 
-      var x = (i * map.tile.width) + padd;
+      var x = (i * map.tile.width) + map.padd;
       var y = (j * map.tile.height);
 
       var iso = projection.project(x, y);
@@ -84,7 +84,7 @@ map.drawTiles = function() {
       if(map.tiles[i][j] === 1) {
         obj = new gridCell(x, y);
       } else {
-        // obj = new rect(x + padd, y, 'white');
+        // obj = new rect(x + map.padd, y, 'white');
       }
 
       entities['tile_' + i + '_' + j] = obj;

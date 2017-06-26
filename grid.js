@@ -34,7 +34,7 @@ grid.draw = function() {
   for(var i = 0; i < map.size().width; i++) {
     for(var j = 0; j < map.size().height; j++) {
 
-      var x = (i * grid.width) + padd;
+      var x = (i * grid.width) + map.padd;
       var y = (j * grid.height);
 
       var iso = projection.project(x, y);
@@ -42,7 +42,7 @@ grid.draw = function() {
       if(map.tiles[i][j] === 1) {
         obj = new gridCell(x, y);
       } else {
-        // obj = new rect(x + padd, y, 'white');
+        // obj = new rect(x + map.padd, y, 'white');
       }
 
       entities['tile_' + i + '_' + j] = obj;
