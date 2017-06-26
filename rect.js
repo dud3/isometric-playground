@@ -13,5 +13,5 @@ function rect(x, y, color) {
 
 rect.prototype.draw = function() {
   drawRect(ctx, this.x, this.y,
-           this.width, this.height, this.color)
+           this.width, this.height, this.color);
 };

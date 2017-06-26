@@ -27,7 +27,7 @@ c.addEventListener("mousemove", function(e) {
 
   var uniso = projection.project(
     (Math.floor( (iso.x + map.padd) / grid.width ) * grid.width),
-    (Math.floor( (iso.y) / grid.height ) * grid.height)
+    (Math.floor( (iso.y) / grid.height) * grid.height)
   );
 
   aTile.x = uniso.x;

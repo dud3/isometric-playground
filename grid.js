@@ -1,9 +1,5 @@
 // Grid
 
-var grid = {
-  width: 10,
-  height: 10
-};
 function gridCell(x, y) {
   this.x = x;
   this.y = y;
@@ -30,14 +26,17 @@ gridCellm.draw = function() {
 
   ctx.stroke();
 };
+
+var grid = {
+  width: 10,
+  height: 10
+};
 grid.draw = function() {
   for(var i = 0; i < map.size().width; i++) {
     for(var j = 0; j < map.size().height; j++) {
 
       var x = (i * grid.width) + map.padd;
       var y = (j * grid.height);
-
-      var iso = projection.project(x, y);
 
       if(map.tiles[i][j] === 1) {
         obj = new gridCell(x, y);
