@@ -20,24 +20,23 @@ c.addEventListener("mousemove", function(e) {
   var gridY = Math.floor(iso.y / map.tile.height);
   var _tile = entities['tile_' + gridX + '_' + gridY];
 
-  console.log(
-    (Math.floor( (iso.x + map.padd) / grid.width ) * grid.width),
-    (Math.floor( (iso.y) / grid.height ) * grid.height)
-  );
+  var snapX = Math.floor((iso.x + map.padd) / grid.width) * grid.width;
+  var snapY = Math.floor((iso.y) / grid.height) * grid.height;
 
-  var uniso = projection.project(
-    (Math.floor( (iso.x + map.padd) / grid.width ) * grid.width),
-    (Math.floor( (iso.y) / grid.height) * grid.height)
-  );
+  console.log(snapX, snapY);
 
-  aTile.x = uniso.x;
-  aTile.y = uniso.y;
+  var uniso = projection.project(snapX, snapY);
+
+  // console.log(uniso.x, uniso.y);
+
+  aBed.x = uniso.x;
+  aBed.y = uniso.y;
 
   if(_tile !== undefined) {
     console.log(_tile);
   }
 
-  aTile.draw();
+  aBed.draw();
 });
 
 c.mouseDown = false;

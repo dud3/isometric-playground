@@ -55,16 +55,20 @@ var map = {
 function tile(x, y) {
   this.x = x;
   this.y = y;
+  this.width = 52;
+  this.height = 32;
   this.frame = 0;
 }
 tile.prototype.draw = function() {
   var img = document.getElementById('tileset');
+
   // Params:
   // ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
-  ctx.drawImage(img, this.frame * 52, 0, 52, 32, this.x, this.y, 52, 32);
+  ctx.drawImage(img, this.frame * this.width, 0, this.width,
+    this.height, this.x, this.y, this.width, this.height);
 
   // Debug
-  ctx.strokeRect(this.x, this.y, 52, 32);
+  ctx.strokeRect(this.x, this.y, this.width, this.height);
   // ctx.fillRect(this.x, this.y, 52, 32);
 };
 

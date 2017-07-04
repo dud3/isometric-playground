@@ -6,8 +6,6 @@
 function lines() {
 	this.args = arguments;
 
-	console.log(this.args);
-
 	if(this.args.length < 2) {
 		console.warn("At least 2 elements. args: " + this.args.length);
 		return false;
