@@ -27,3 +27,4 @@ vector.prototype.setPos = function(x, y) {
 vector.prototype.getPos = function(vec) {
 	return {x: this._x, y: this._y};
 };
+
