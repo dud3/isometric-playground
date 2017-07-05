@@ -1,6 +1,5 @@
 function bed(x, y) {
-  this.x = x;
-  this.y = y;
+	this.pos = new vector(x, y);
 }
 bed.prototype.draw = function() {
   var img = document.getElementById('fireplace');
@@ -8,8 +7,8 @@ bed.prototype.draw = function() {
   this.width = img.width;
   this.height = img.height;
 
-  ctx.drawImage(img, this.x, this.y);
+  ctx.drawImage(img, this.pos.x, this.pos.y);
 
   // Debug
-  ctx.strokeRect(this.x, this.y, this.width, this.height);
+  ctx.strokeRect(this.pos.x, this.pos.y, this.width, this.height);
 };

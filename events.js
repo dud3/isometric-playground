@@ -27,10 +27,7 @@ c.addEventListener("mousemove", function(e) {
 
   var uniso = projection.project(snapX, snapY);
 
-  // console.log(uniso.x, uniso.y);
-
-  aBed.x = uniso.x;
-  aBed.y = uniso.y;
+  aBed.pos.setPos(uniso.x, uniso.y);
 
   if(_tile !== undefined) {
     console.log(_tile);
