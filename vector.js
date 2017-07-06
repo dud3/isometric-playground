@@ -38,6 +38,15 @@ vector.prototype.dist = function(v) {
 	return Math.sqrt((diffx * diffx) + (diffy * diffy));
 };
 
+// v0 -> starting vector
+// v1 -> ending vector
+vector.prototype.isBetween(v0, v1) {
+	return (
+		((this.x > v0.x) && (this.y > v0.y)) &&
+		((this.x < v1.x) && (this.x < v1.y))
+	);
+};
+
 vector.prototype.setPos = function(x, y) {
 	this.x = x;
 	this.y = y;
