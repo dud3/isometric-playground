@@ -11,9 +11,9 @@ var collider = {
 		var c1 = e1 instanceof collider.circle;
 		var r1 = e1 instanceof collider.rect;
 
-		this.circleCollision = function(e0, e1) {
-			var dist = util.math.distSq(e0.pos.x, e0.pos.y, e1.pos.x, e2.pos.x);
-			var raddist = e0.radius + e1.radius;
+		this.circleCollision = function(c0, c1) {
+			var dist = util.math.distSq(c0.pos.x, c0.pos.y, c1.pos.x, e2.pos.x);
+			var raddist = c0.radius + c1.radius;
 
 			if(dist <= raddist) {
 				return true;
@@ -22,21 +22,33 @@ var collider = {
 			return false;
 		};
 
-		this.rectCollision = function(e0, e1) {
+		this.rectCollision = function(c0, c1) {
 
-			// If any of the edges of e1 is between the starting (top left)
-			// and ending (bottom right) points of e0, then we have a collision
+			// If any of the edges of c1 is between the starting (top left)
+			// and ending (bottom right) points of c0, then we have a collision
 
-			var tl = e1.pos.topLeft.isBetween(e0.pos.topLeft, e0.pos.bottomRight);
-			var tr = e1.pos.topRight.isBetween(e0.pos.topLeft, e0.pos.bottomRight);
-			var bl = e1.pos.bottomLeft.isBetween(e0.pos.topLeft, e0.pos.bottomRight);
-			var br = e1.pos.bottomRight.isBetween(e0.pos.topLeft, e0.pos.bottomRight);
+			var tl = c1.pos.topLeft.isBetween(c0.pos.topLeft, c0.pos.bottomRight);
+			var tr = c1.pos.topRight.isBetween(c0.pos.topLeft, c0.pos.bottomRight);
+			var bl = c1.pos.bottomLeft.isBetween(c0.pos.topLeft, c0.pos.bottomRight);
+			var br = c1.pos.bottomRight.isBetween(c0.pos.topLeft, c0.pos.bottomRight);
 
 			return tl || tr || bl || br;
 		};
 
-		this.polyCollision = function(e0, e1) {
+		this.circleRectCollision = function(c, r) {
 
+			// Find the closest point to the circle within the rectangle
+			var closestX = util.math.clamp(c.x, r.topLeft.x, r.topRight.x);
+			var closestY = util.math.clamp(c.y, r.topLeft.y, r.bottomLeft.y);
+
+			// Calculate the distance between the circle's center and this closest point
+			var distanceX = c.x - closestX;
+			var distanceY = c.y - closestY;
+
+			// If the distance is less than the circle's radius, an intersection occurs
+			var distanceSquared = (distanceX * distanceX) + (distanceY * distanceY);
+
+			return distanceSquared < (c.r * c.r);
 		};
 
 		this.check = function() {
@@ -50,11 +62,11 @@ var collider = {
 
 			// circle and rect
 			if(c0 && r1)
-				return this_co.polyCollision(c0, r1);
+				return this_co.circleRectCollision(c0, r1);
 
 			// rect and circle
 			if(r0 && c1)
-				return this_co.polyCollision(c1, r0);
+				return this_co.circleRectCollision(c1, r0);
 		};
 	},
 
