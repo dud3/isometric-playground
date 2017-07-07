@@ -40,7 +40,7 @@ vector.prototype.dist = function(v) {
 
 // v0 -> starting vector
 // v1 -> ending vector
-vector.prototype.isBetween(v0, v1) {
+vector.prototype.isBetween = function(v0, v1) {
 	return (
 		((this.x > v0.x) && (this.y > v0.y)) &&
 		((this.x < v1.x) && (this.x < v1.y))
