@@ -2,17 +2,10 @@ var collider = {
 
 	// e0 = emtity0 -> circle | rect
 	// e1 = entity1 -> circle | rect
-	collision: function(e0, e1) {
-		var this_co = this;
+	collision: {
 
-		var c0 = e0 instanceof collider.circle;
-		var r0 = e0 instanceof collider.rect;
-
-		var c1 = e1 instanceof collider.circle;
-		var r1 = e1 instanceof collider.rect;
-
-		this.circleCollision = function(c0, c1) {
-			var dist = util.math.distSq(c0.pos.x, c0.pos.y, c1.pos.x, e2.pos.x);
+		circleCollision: function(c0, c1) {
+			var dist = util.math.distSq(c0.pos.x, c0.pos.y, c1.pos.x, c1.pos.x);
 			var raddist = c0.radius + c1.radius;
 
 			if(dist <= raddist) {
@@ -22,7 +15,7 @@ var collider = {
 			return false;
 		};
 
-		this.rectCollision = function(c0, c1) {
+		rectCollision: function(c0, c1) {
 
 			// If any of the edges of c1 is between the starting (top left)
 			// and ending (bottom right) points of c0, then we have a collision
@@ -35,7 +28,7 @@ var collider = {
 			return tl || tr || bl || br;
 		};
 
-		this.circleRectCollision = function(c, r) {
+		circleRectCollision: function(c, r) {
 
 			// Find the closest point to the circle within the rectangle
 			var closestX = util.math.clamp(c.x, r.topLeft.x, r.topRight.x);
@@ -51,22 +44,28 @@ var collider = {
 			return distanceSquared < (c.r * c.r);
 		};
 
-		this.check = function() {
+		check: function(e0, e1) {
+
+			var c0 = e0 instanceof of collider.circle;
+			var r0 = e0 instanceof of collider.rect;
+			var c1 = e1 instanceof of collider.circle;
+			var c1 = e1 instanceof of collider.rect;
+
 			// circle and circle
 			if(c0 && c1)
-				return this_co.circleCollision(c0, c1);
+				return this.circleCollision(c0, c1);
 
 			// rect and rect
 			if(r0 && r1)
-				return this_co.rectCollision(r0, r1);
+				return this.rectCollision(r0, r1);
 
 			// circle and rect
 			if(c0 && r1)
-				return this_co.circleRectCollision(c0, r1);
+				return this.circleRectCollision(c0, r1);
 
 			// rect and circle
 			if(r0 && c1)
-				return this_co.circleRectCollision(c1, r0);
+				return this.circleRectCollision(c1, r0);
 		};
 	},
 
