@@ -27,10 +27,10 @@
 //  2. Find a point in isometric projection(project from screen to isometric):
 //      2 * xIso + 2 * yIso = (0, 1)
 //
-//  Meaninig that (2, 2) in screen coordinates would mean (0, 1) in isometric.
+//  Meaninig that (2, 2) in screen coordinates would be (0, 1) in isometric.
 //
 //  To make our life easier, we write the base vectors as tranransformation matrices,
-//  and the points that we want to project from one projection to another as vectors:
+//  and the points we want to project from one projection to another as vectors:
 //
 //  Example 1. above becomes(screen coordinates):
 //      screenMatrix * [2] = [2]
@@ -41,10 +41,10 @@
 //                  [2]   [1]
 //
 //  Since we know how to project from screen->isometric, one thing left is to find the
-//  projection from isometric->screen, which is the inverse.
+//  projection from isometric->screen, which is it's inverse.
 //
 //  We have the isoMatrix which projects scree->isometric, we need to find the inverse matrix.
-//  Which is done like the following:
+//  Which is done as the following:
 //      M = [ a b ]
 //          [ c d ]
 //
